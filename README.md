@@ -77,12 +77,3 @@ src/
 
 - `project history.md` — что менялось по датам и почему.
 - `code moments.md` — разборы по темам: хуки, Context, async-CRD, роутер, стили, анимации.
-
-## Известные проблемы
-
-- `deleteTask` внутри `setTimeout` фильтрует `tasks` из замыкания, а не актуальный стейт: если за 400 мс успеть переключить чекбокс или добавить задачу, это изменение откатится. Нужен `setTasks((prev) => prev.filter(...))`.
-- На анимацию выделен один id, поэтому два удаления подряд (или добавление во время удаления) прерывают анимацию первой задачи.
-- Таймеры не гасятся через `clearTimeout`.
-- `src/hooks/useCombinedRefs.js` не импортируется нигде, а имя файла не совпадает с именем функции (`useCombineRefs`).
-- `useTasks.js:15-16` — мёртвый код: `firstIncompleteTaskRef` и `firstIncompleteTaskId` провайдер берёт из `useIncompleteTaskScroll`.
-- `npm run lint` даёт 5 ошибок и 1 предупреждение (2 из них — неиспользуемые `useRef` в `TodoItem.jsx` и `memo` в `TodoList.jsx`).
